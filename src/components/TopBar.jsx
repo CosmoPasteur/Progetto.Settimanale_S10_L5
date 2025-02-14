@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 
 function TopBar() {
   const [city, setCity] = useState("Milano");
-
-  useEffect(() => {
-    console.log(city);
-  }, [city]);
 
   return (
     <>
@@ -22,7 +18,7 @@ function TopBar() {
             <Form className="d-flex">
               <Form.Control
                 type="search"
-                onChange={(e) => console.log(e)}
+                onChange={(e) => setCity(e.target.value)}
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
