@@ -1,7 +1,6 @@
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
-import { Form } from "react-router-dom";
+import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 
-const TopBar = () => {
+function TopBar() {
   return (
     <>
       <Navbar expand="lg" className="bg-info">
@@ -23,6 +22,6 @@ const TopBar = () => {
       </Navbar>
     </>
   );
-};
+}
 
 export default TopBar;

@@ -1,17 +1,6 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { Alert } from "react-bootstrap";
 
-const HomePage = () => {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          {/* <Route path="/" element={<Radar />} />
-          <Route path="/" element={<Contacts />} /> */}
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
-};
-
+function HomePage() {
+  return <></>;
+}
 export default HomePage;
