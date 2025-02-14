@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 
-function TopBar() {
+function TopBar({ childToParent }) {
   const [city, setCity] = useState("Milano");
-
+  const handleClick = () => {
+    childToParent(city);
+  };
   return (
     <>
       <Navbar expand="lg" className="bg-info">
@@ -23,7 +25,9 @@ function TopBar() {
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button onClick={handleClick} variant="outline-success">
+                Search
+              </Button>
             </Form>
           </Navbar.Collapse>
         </Container>

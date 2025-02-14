@@ -2,13 +2,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import TopBar from "./components/TopBar";
 import HomePage from "./components/HomePage";
+import { useState } from "react";
 
 function App() {
+  const getData = (city) => {
+    setCity(city);
+  };
+
+  let [city, setCity] = useState("");
+
   return (
     <BrowserRouter>
-      <TopBar />
+      <TopBar childToParent={getData} />
       <Routes>
-        <Route path="homepage" element={<HomePage />} />
+        <Route path="homepage" element={<HomePage searchName={city} />} />
       </Routes>
     </BrowserRouter>
   );
