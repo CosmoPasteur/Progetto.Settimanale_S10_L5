@@ -1,7 +1,7 @@
 // import { Alert } from "react-bootstrap";
 
 import { useEffect, useState } from "react";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { Col, Container, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 
 function HomePage({ searchName }) {
   const [lon, setLon] = useState(null);
@@ -58,7 +58,21 @@ function HomePage({ searchName }) {
       })
       .then((data) => {
         console.log("DATI DEL METEO", data);
-        setMeteo(data.list); // Salvataggio e aggiornamento dei dati
+
+        const giornoPerGiorno = [];
+        const seenDates = new Set();
+
+        data.list.forEach((item) => {
+          const date = item.dt_txt.split(" ")[0]; // Prende solo la data giorno
+          const hour = item.dt_txt.split(" ")[1]; //Prende l'ora -- h6 --
+
+          if (!seenDates.has(date) && hour === "12:00:00") {
+            seenDates.add(date);
+            giornoPerGiorno.push(item);
+          }
+        });
+
+        setMeteo(giornoPerGiorno); // Salvataggio e aggiornamento dei dati
       })
       .catch((e) => console.error("Errore nel meteo", e));
   };
@@ -72,12 +86,26 @@ function HomePage({ searchName }) {
           <strong>Coordinate:</strong> {lat}, {lon}
         </p>
       )}
-      <ListGroup className="text-start">
-        {meteo.slice(0, 5).map((item, index) => (
-          <ListGroupItem key={index}>
-            {new Date(item.dt_txt).toLocaleString()} - {item.weather[0].description}, {item.main.temp}°C
-          </ListGroupItem>
-        ))}
+      <span>Previsioni Meteo:</span>
+      <ListGroup className="text-start ">
+        <Container fluid className="d-flex justify-content-center">
+          <Row>
+            <Col>
+              {meteo.slice(0, 5).map((list, index) => (
+                <ListGroupItem key={index}>
+                  <p>{new Date(list.dt_txt).toLocaleString()}</p>
+                  <strong>Previsione:</strong> {list.weather[0].description}{" "}
+                  <img
+                    src={`https://openweathermap.org/img/wn/${list.weather[0].icon}@2x.png`}
+                    alt={list.weather[0].description}
+                    style={{ width: "50px", height: "50px", marginLeft: "10px" }}
+                  />
+                  ,<strong> {list.main.temp}°C</strong> ,
+                </ListGroupItem>
+              ))}
+            </Col>
+          </Row>
+        </Container>
       </ListGroup>
     </div>
   );
