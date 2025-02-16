@@ -95,7 +95,7 @@ function HomePage({ searchName }) {
                 <ListGroupItem key={index}>
                   <p>{new Date(list.dt_txt).toLocaleString()}</p>
                   <strong>Previsione:</strong> {list.weather[0].description}{" "}
-                  <img
+                  <img //per vedere le icone meteo
                     src={`https://openweathermap.org/img/wn/${list.weather[0].icon}@2x.png`}
                     alt={list.weather[0].description}
                     style={{ width: "50px", height: "50px", marginLeft: "10px" }}
