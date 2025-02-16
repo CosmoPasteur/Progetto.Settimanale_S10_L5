@@ -51,7 +51,7 @@ function HomePage({ searchName }) {
   };
 
   const getMeteo = (lat, lon) => {
-    fetch(`${url}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${appid}&lang=it`)
+    fetch(`${url}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${appid}&lang=it&units=metric`)
       .then((resp) => {
         if (!resp.ok) throw new Error("TEMPESTA! Errore durante la chiamata meteo.");
         return resp.json();
